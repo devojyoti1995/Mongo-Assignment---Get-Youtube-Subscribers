@@ -37,7 +37,7 @@ app.get("/subscribers/:id",async (res,req)=>{
     try{
         const subscriberFound = await subscribers.findOne({_id:idToSearch});
         if(subscriberFound==null){
-            res.status(400).send({messeage:"Id not found"});
+            res.status(400).send({message:"Id not found"});
         }else{
             res.send(subscriberFound);
         }
