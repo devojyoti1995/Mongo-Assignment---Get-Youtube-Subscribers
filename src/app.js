@@ -20,7 +20,7 @@ app.get("/subscribers",async (req,res)=>{
 // })
 
 
-app.get("/subscribers/names",async (re,req)=>{
+app.get("/subscribers/names",async (res,req)=>{
     const projectedResult = await subscribers.find().select({
         _id : false,
         subscribedDate : false,
