@@ -7,27 +7,29 @@ const app = express()
 app.get("/subscribers",async (req,res)=>{
     res.send(await subscribers.find());
 })
-// app.get("/subscribers/names",async (re,req)=>{
-//     const fullListOfSubscribers = await subscribers.find();
-//     const mappedResults = fullListOfSubscribers.map(subscriber => ({
-//         name : subscriber.name,
-//         subscribedChannel : subscriber.subscribedChannel
-//     }));
-
-//     res.send(mappedResults);
-// })
 
 
 app.get("/subscribers/names",async (re,req)=>{
-    const projectedResult = await subscribers.find().select({
-        _id : false,
-        subscribedDate : false,
-        __v : false
-        
-    });
-    res.send(projectedResult);
-   
+    const fullListOfSubscribers = await subscribers.find();
+    const mappedResults = fullListOfSubscribers.map(subscriber => ({
+        name : subscriber.name,
+        subscribedChannel : subscriber.subscribedChannel
+    }));
+
+    res.send(mappedResults);
 })
+
+
+// app.get("/subscribers/names",async (re,req)=>{
+//     const projectedResult = await subscribers.find().select({
+//         _id : false,
+//         subscribedDate : false,
+//         __v : false
+        
+//     });
+//     res.send(projectedResult);
+   
+// })
 
 
 app.get("/subscribers/:id",async (res,req)=>{
