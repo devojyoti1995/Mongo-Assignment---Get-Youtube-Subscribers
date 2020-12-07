@@ -9,27 +9,27 @@ app.get("/subscribers",async (req,res)=>{
 })
 
 
-app.get("/subscribers/names",async (re,req)=>{
-    const fullListOfSubscribers = await subscribers.find();
-    const mappedResults = fullListOfSubscribers.map(subscriber => ({
-        name : subscriber.name,
-        subscribedChannel : subscriber.subscribedChannel
-    }));
-
-    res.send(mappedResults);
-})
-
-
 // app.get("/subscribers/names",async (re,req)=>{
-//     const projectedResult = await subscribers.find().select({
-//         _id : false,
-//         subscribedDate : false,
-//         __v : false
-        
-//     });
-//     res.send(projectedResult);
-   
+//     const fullListOfSubscribers = await subscribers.find();
+//     const mappedResults = fullListOfSubscribers.map(subscriber => ({
+//         name : subscriber.name,
+//         subscribedChannel : subscriber.subscribedChannel
+//     }));
+
+//     res.send(mappedResults);
 // })
+
+
+app.get("/subscribers/names",async (re,req)=>{
+    const projectedResult = await subscribers.find().select({
+        _id : false,
+        subscribedDate : false,
+        __v : false
+        
+    });
+    res.send(projectedResult);
+   
+})
 
 
 app.get("/subscribers/:id",async (res,req)=>{
@@ -42,7 +42,7 @@ app.get("/subscribers/:id",async (res,req)=>{
             res.send(subscriberFound);
         }
     }catch(err){
-        res.status(400).send({messeage: err.messeage})
+        res.status(400).send({message: err.message})
     }
     
 });
